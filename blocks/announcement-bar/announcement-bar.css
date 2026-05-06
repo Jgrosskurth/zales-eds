@@ -1,57 +1,69 @@
-/* =============================================================================
-   ZALES EDS — announcement-bar.css
-   ============================================================================= */
+/*
+ * ZALES EDS — blocks/announcement-bar/announcement-bar.css
+ * Deep navy strip, 38px tall, 3-column layout.
+ * Left: Find a Store | Help
+ * Center: rotating promo carousel with < > arrows
+ * Right: Book an Appointment | Vault Rewards
+ */
 
+/* ── Block shell ────────────────────────────────────────────────────────────── */
 .announcement-bar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 200;
-  background: var(--color-primary);
-  color: var(--color-white);
-  font-family: var(--font-body);
-  font-size: var(--font-size-xs);
-  letter-spacing: 0.06em;
   height: 38px;
+  background: #2B1650;        /* --color-primary exact value */
+  color: #ffffff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1;
 }
 
+/* ── Inner 3-col grid ───────────────────────────────────────────────────────── */
 .announcement-bar-inner {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  max-width: var(--max-width);
   height: 100%;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 16px;
 }
 
 /* ── Left utility links ─────────────────────────────────────────────────────── */
 .announcement-bar-left {
   display: none;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
 .announcement-bar-left a {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  color: var(--color-white);
+  gap: 5px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-decoration: none;
-  opacity: 0.9;
-  transition: opacity var(--transition-fast);
+  opacity: 0.88;
   white-space: nowrap;
+  transition: opacity 0.18s ease, color 0.18s ease;
 }
 
 .announcement-bar-left a:hover {
   opacity: 1;
-  color: var(--color-accent);
+  color: #C9A96E;
+  text-decoration: none;
 }
 
 .announcement-bar-left .utility-icon {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   fill: currentColor;
   flex-shrink: 0;
 }
@@ -61,43 +73,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-sm);
-  min-width: 0;
 }
 
 .announcement-carousel {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  max-width: 520px;
+  gap: 8px;
 }
 
+/* Prev/Next arrow buttons */
 .carousel-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  color: var(--color-white);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
   cursor: pointer;
   border-radius: 50%;
   padding: 0;
   flex-shrink: 0;
   transition:
-    background var(--transition-fast),
-    border-color var(--transition-fast);
+    background 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .carousel-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.65);
 }
 
 .carousel-btn svg {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -105,14 +115,16 @@
   stroke-linejoin: round;
 }
 
+/* Carousel message viewport */
 .carousel-messages {
   position: relative;
   overflow: hidden;
   text-align: center;
-  height: 20px;
-  min-width: 280px;
+  height: 18px;
+  min-width: 240px;
 }
 
+/* Individual message items */
 .carousel-message {
   position: absolute;
   top: 0;
@@ -122,12 +134,14 @@
   opacity: 0;
   transform: translateY(100%);
   transition:
-    opacity 0.4s ease,
-    transform 0.4s ease;
+    opacity 0.35s ease,
+    transform 0.35s ease;
   white-space: nowrap;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  line-height: 20px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  line-height: 18px;
+  color: #ffffff;
 }
 
 .carousel-message.active {
@@ -140,24 +154,25 @@
   transform: translateY(-100%);
 }
 
-/* Dots */
+/* Carousel dots */
 .carousel-dots {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: 4px;
+  flex-shrink: 0;
 }
 
 .carousel-dot {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.35);
-  transition: background var(--transition-fast);
+  background: rgba(255, 255, 255, 0.3);
+  transition: background 0.18s ease;
+  flex-shrink: 0;
 }
 
 .carousel-dot.active {
-  background: var(--color-white);
+  background: #ffffff;
 }
 
 /* ── Right utility links ────────────────────────────────────────────────────── */
@@ -165,38 +180,44 @@
   display: none;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--spacing-md);
+  gap: 16px;
 }
 
 .announcement-bar-right a {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  color: var(--color-white);
+  gap: 5px;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
   text-decoration: none;
-  opacity: 0.9;
-  transition: opacity var(--transition-fast);
+  opacity: 0.88;
   white-space: nowrap;
+  transition: opacity 0.18s ease, color 0.18s ease;
 }
 
 .announcement-bar-right a:hover {
   opacity: 1;
-  color: var(--color-accent);
+  color: #C9A96E;
+  text-decoration: none;
 }
 
 .announcement-bar-right .utility-icon {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   fill: currentColor;
   flex-shrink: 0;
 }
 
-/* ── Divider ────────────────────────────────────────────────────────────────── */
+/* ── Divider between links ──────────────────────────────────────────────────── */
 .utility-divider {
+  display: inline-block;
   width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.25);
+  height: 13px;
+  background: rgba(255, 255, 255, 0.22);
   flex-shrink: 0;
+  vertical-align: middle;
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────────── */
@@ -206,21 +227,21 @@
     display: flex;
   }
 
+  .announcement-bar-inner {
+    padding: 0 24px;
+  }
+
   .carousel-messages {
-    min-width: 320px;
+    min-width: 300px;
   }
 }
 
 @media (min-width: 1024px) {
-  .announcement-bar {
-    font-size: 12px;
-  }
-
   .announcement-bar-inner {
-    padding: 0 var(--spacing-lg);
+    padding: 0 40px;
   }
 
   .carousel-messages {
-    min-width: 400px;
+    min-width: 380px;
   }
 }
