@@ -1,1 +1,365 @@
-/* add global styles that can be loaded post LCP here */
+/*
+ * ZALES EDS — styles/lazy-styles.css
+ * Loaded after LCP. Contains scroll animations, reduced-motion overrides,
+ * and non-critical UI enhancements.
+ */
+
+/* ============================================================================
+   1. GLOBAL SCROLL REVEAL
+   ============================================================================ */
+
+/*
+ * .reveal-on-scroll — applied via JS IntersectionObserver.
+ * Initial state defined here; .is-visible class triggers the reveal.
+ */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delay utilities for reveal groups */
+.reveal-stagger-1 { transition-delay: 0.08s; }
+.reveal-stagger-2 { transition-delay: 0.16s; }
+.reveal-stagger-3 { transition-delay: 0.24s; }
+.reveal-stagger-4 { transition-delay: 0.32s; }
+.reveal-stagger-5 { transition-delay: 0.40s; }
+.reveal-stagger-6 { transition-delay: 0.48s; }
+
+/* Fade only (no translate) */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.reveal-fade.is-visible { opacity: 1; }
+
+/* Slide from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Slide from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(32px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================================
+   2. HERO KEN BURNS ANIMATION
+   ============================================================================ */
+
+/*
+ * Applied to .hero-media img on page load.
+ * Subtle scale from 1.04 → 1.0 over 8s — cinematic slow zoom-out.
+ */
+@keyframes kenBurns {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.0); }
+}
+
+.hero-media img {
+  animation: kenBurns 8s ease-out forwards;
+}
+
+/* Pause Ken Burns when hero is not visible (performance) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-media img {
+    animation-duration: 8s;
+  }
+}
+
+/* ============================================================================
+   3. ANNOUNCEMENT BAR CROSSFADE
+   ============================================================================ */
+
+/*
+ * Carousel transition: crossfade between messages.
+ * .active = visible, .exiting = fading out.
+ */
+.carousel-message {
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+/* ============================================================================
+   4. HERO TEXT STAGGER ENTRY
+   ============================================================================ */
+
+/*
+ * Hero elements start hidden; .hero-visible class triggers staggered reveal.
+ * Eyebrow → Gold Rule → H1 → Body → CTAs — each delayed 100ms from previous.
+ */
+.hero-eyebrow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease 0.1s,
+    transform 0.6s ease 0.1s;
+}
+
+.hero-gold-rule {
+  opacity: 0;
+  width: 0;
+  transition:
+    opacity 0.5s ease 0.2s,
+    width 0.6s ease 0.2s;
+}
+
+.hero-headline {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.25s,
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+}
+
+.hero-body {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease 0.4s,
+    transform 0.6s ease 0.4s;
+}
+
+.hero-ctas {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s ease 0.55s,
+    transform 0.6s ease 0.55s;
+}
+
+.hero-scroll {
+  opacity: 0;
+  transition: opacity 0.8s ease 0.9s;
+}
+
+/* Triggered by JS when hero enters viewport */
+.hero.hero-visible .hero-eyebrow,
+.hero.hero-visible .hero-headline,
+.hero.hero-visible .hero-body,
+.hero.hero-visible .hero-ctas,
+.hero.hero-visible .hero-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero.hero-visible .hero-gold-rule {
+  opacity: 1;
+  width: 64px;
+}
+
+/* ============================================================================
+   5. NAV UNDERLINE ANIMATION
+   ============================================================================ */
+
+/*
+ * Nav hover underline: scaleX(0) → scaleX(1) from center
+ */
+.header-nav ul > li > a::after {
+  transform-origin: center;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-nav ul > li:hover > a::after,
+.header-nav ul > li.active > a::after {
+  transform: scaleX(1);
+  transform-origin: center;
+}
+
+/* ============================================================================
+   6. GIFT GUIDE TAB PANEL TRANSITION
+   ============================================================================ */
+
+.gift-guide-panel.active {
+  animation: panelFadeIn 0.25s ease forwards;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   7. PRODUCT CAROUSEL MOMENTUM
+   ============================================================================ */
+
+.product-carousel-track {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ============================================================================
+   8. SPLIT BANNER REVEAL
+   ============================================================================ */
+
+.split-banner-content-inner {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition:
+    opacity 0.7s ease 0.1s,
+    transform 0.7s ease 0.1s;
+}
+
+.split-banner.right .split-banner-content-inner {
+  transform: translateX(24px);
+}
+
+.split-banner.is-visible .split-banner-content-inner {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================================
+   9. EDITORIAL TEXT REVEAL
+   ============================================================================ */
+
+.editorial-text .editorial-text-inner {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.editorial-text.is-visible .editorial-text-inner {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   10. CURATED LOOKS + CATEGORY NAV CARD STAGGER
+   ============================================================================ */
+
+.curated-look-card,
+.category-nav-tile {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.curated-look-card.is-visible,
+.category-nav-tile.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger cards: 80ms per card */
+.curated-look-card:nth-child(1),
+.category-nav-tile:nth-child(1) { transition-delay: 0s; }
+
+.curated-look-card:nth-child(2),
+.category-nav-tile:nth-child(2) { transition-delay: 0.08s; }
+
+.curated-look-card:nth-child(3),
+.category-nav-tile:nth-child(3) { transition-delay: 0.16s; }
+
+.curated-look-card:nth-child(4),
+.category-nav-tile:nth-child(4) { transition-delay: 0.24s; }
+
+.curated-look-card:nth-child(5),
+.category-nav-tile:nth-child(5) { transition-delay: 0.32s; }
+
+.curated-look-card:nth-child(6),
+.category-nav-tile:nth-child(6) { transition-delay: 0.40s; }
+
+.curated-look-card:nth-child(7),
+.category-nav-tile:nth-child(7) { transition-delay: 0.48s; }
+
+.curated-look-card:nth-child(8),
+.category-nav-tile:nth-child(8) { transition-delay: 0.56s; }
+
+/* ============================================================================
+   11. SCROLL PULSE ANIMATION (Hero scroll indicator)
+   ============================================================================ */
+
+@keyframes scrollPulse {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scaleY(0.55);
+    opacity: 1;
+  }
+}
+
+.hero-scroll-line {
+  animation: scrollPulse 2.2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+/* ============================================================================
+   12. REDUCED MOTION — Respect user preference
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Ensure elements that start hidden are immediately visible */
+  .reveal-on-scroll,
+  .reveal-fade,
+  .reveal-left,
+  .reveal-right,
+  .hero-eyebrow,
+  .hero-gold-rule,
+  .hero-headline,
+  .hero-body,
+  .hero-ctas,
+  .hero-scroll,
+  .curated-look-card,
+  .category-nav-tile,
+  .split-banner-content-inner,
+  .editorial-text .editorial-text-inner {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    width: auto !important;
+  }
+
+  .hero-gold-rule {
+    width: 64px !important;
+  }
+
+  .hero-media img {
+    animation: none !important;
+  }
+}
