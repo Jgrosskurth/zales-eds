@@ -1,36 +1,54 @@
-/* stylelint-disable max-line-length */
+/*
+ * ZALES EDS — styles/fonts.css
+ * Web font loading: Cormorant Garamond (display) via Google Fonts.
+ * Loaded eagerly for LCP text on hero and headlines.
+ */
+
+/* ── Google Fonts preconnect is done in <head> — this file handles @font-face ─ */
+
+/*
+ * Cormorant Garamond — display serif
+ * Weights used: 300 (light), 400 (regular), 600 (semibold)
+ * Loaded via Google Fonts CDN. The @import below is the fallback if
+ * the <link rel="preload"> in the HTML head is not used.
+ */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap');
+
+/*
+ * System font fallbacks — sized to match Cormorant Garamond
+ * to minimize Cumulative Layout Shift (CLS).
+ *
+ * Georgia is the closest system serif and is used as the primary fallback.
+ * Size-adjust compensates for the metric difference.
+ */
 @font-face {
-  font-family: roboto-condensed;
+  font-family: 'Cormorant Garamond';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 300 600;
   font-display: swap;
-  src: url('../fonts/roboto-condensed-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: local('Georgia'), local('Times New Roman');
+  /* Georgia runs slightly smaller than Cormorant Garamond */
+  size-adjust: 108%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
 }
 
 @font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 700;
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 600;
   font-display: swap;
-  src: url('../fonts/roboto-bold.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  src: local('Georgia Italic'), local('Times New Roman Italic');
+  size-adjust: 108%;
+  ascent-override: 92%;
+  descent-override: 24%;
+  line-gap-override: 0%;
 }
 
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/roboto-medium.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: roboto;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../fonts/roboto-regular.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+/*
+ * Helvetica Neue fallback for --font-body.
+ * Helvetica Neue is available on macOS/iOS; on Windows/Android we
+ * cascade to system-ui → Arial. No @font-face needed — handled in
+ * the CSS custom property declaration.
+ */
