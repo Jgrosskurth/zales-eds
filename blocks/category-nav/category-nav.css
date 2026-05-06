@@ -1,0 +1,210 @@
+/* =============================================================================
+   ZALES EDS — category-nav.css
+   Grid of image tiles with label overlay — "Shop by Style" navigation
+   ============================================================================= */
+
+.category-nav {
+  padding: var(--spacing-xl) var(--spacing-md);
+  background: var(--color-off-white);
+}
+
+/* ── Section Header ─────────────────────────────────────────────────────────── */
+.category-nav-header {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.category-nav-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 400;
+  color: var(--color-dark);
+  margin: 0;
+  line-height: 1.15;
+}
+
+.category-nav-subtitle {
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  color: var(--color-mid-gray);
+  margin-top: var(--spacing-sm);
+  letter-spacing: 0.05em;
+}
+
+/* ── Grid ───────────────────────────────────────────────────────────────────── */
+.category-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* 6-up variant */
+.category-nav.six-up .category-nav-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ── Tile ───────────────────────────────────────────────────────────────────── */
+.category-nav-tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  background: var(--color-light-gray);
+  aspect-ratio: 3 / 4;
+  /* Stagger reveal */
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.category-nav-tile.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.category-nav-tile:nth-child(1) { transition-delay: 0s; }
+.category-nav-tile:nth-child(2) { transition-delay: 0.08s; }
+.category-nav-tile:nth-child(3) { transition-delay: 0.16s; }
+.category-nav-tile:nth-child(4) { transition-delay: 0.24s; }
+.category-nav-tile:nth-child(5) { transition-delay: 0.32s; }
+.category-nav-tile:nth-child(6) { transition-delay: 0.40s; }
+
+/* ── Tile Image ─────────────────────────────────────────────────────────────── */
+.category-nav-tile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+  will-change: transform;
+}
+
+.category-nav-tile:hover .category-nav-tile-image,
+.category-nav-tile:focus .category-nav-tile-image {
+  transform: scale(1.06);
+}
+
+/* ── Tile Overlay ───────────────────────────────────────────────────────────── */
+.category-nav-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.55) 0%,
+    rgba(0, 0, 0, 0.15) 40%,
+    transparent 70%
+  );
+  transition: background var(--transition-med);
+}
+
+.category-nav-tile:hover::after {
+  background: linear-gradient(
+    to top,
+    rgba(42, 23, 80, 0.65) 0%,
+    rgba(42, 23, 80, 0.2) 50%,
+    transparent 80%
+  );
+}
+
+/* ── Tile Label ─────────────────────────────────────────────────────────────── */
+.category-nav-tile-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: var(--spacing-md) var(--spacing-sm);
+  text-align: center;
+}
+
+.category-nav-tile-name {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1.2;
+  transition: letter-spacing var(--transition-fast);
+}
+
+.category-nav-tile:hover .category-nav-tile-name {
+  letter-spacing: 0.16em;
+}
+
+.category-nav-tile-arrow {
+  display: block;
+  font-size: 16px;
+  color: var(--color-accent);
+  margin-top: 4px;
+  transform: translateX(-4px);
+  opacity: 0;
+  transition:
+    transform var(--transition-med),
+    opacity var(--transition-med);
+}
+
+.category-nav-tile:hover .category-nav-tile-arrow {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* ── Placeholder ────────────────────────────────────────────────────────────── */
+.category-nav-tile-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2A1750 0%, #1a0f3c 100%);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────────── */
+@media (min-width: 480px) {
+  .category-nav-grid {
+    gap: var(--spacing-md);
+  }
+}
+
+@media (min-width: 768px) {
+  .category-nav {
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+
+  .category-nav-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
+  }
+
+  .category-nav.six-up .category-nav-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .category-nav {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+  }
+
+  .category-nav-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .category-nav.six-up .category-nav-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .category-nav-tile {
+    aspect-ratio: 2 / 3;
+  }
+}
