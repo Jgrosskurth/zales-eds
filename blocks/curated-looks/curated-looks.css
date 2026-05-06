@@ -1,58 +1,62 @@
-/* =============================================================================
-   ZALES EDS — curated-looks.css
-   4-up editorial image grid with hover zoom and stagger reveal
-   ============================================================================= */
+/*
+ * ZALES EDS — blocks/curated-looks/curated-looks.css
+ * 4-up editorial image grid with hover zoom and stagger reveal.
+ * Cards start hidden; IntersectionObserver adds .is-visible to trigger reveal.
+ * Stagger delays defined in lazy-styles.css (80ms per card).
+ */
 
+/* ── Block shell ────────────────────────────────────────────────────────────── */
 .curated-looks {
-  padding: var(--spacing-xl) var(--spacing-md);
-  background: var(--color-white);
+  padding: 64px 16px;
+  background: #ffffff;
 }
 
-/* ── Section Header ─────────────────────────────────────────────────────────── */
+/* ── Section header ─────────────────────────────────────────────────────────── */
 .curated-looks-header {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  max-width: var(--content-max-width);
-  margin: 0 auto var(--spacing-lg);
-  gap: var(--spacing-md);
+  max-width: 1200px;
+  margin: 0 auto 32px;
+  gap: 16px;
 }
 
 .curated-looks-title {
-  font-family: var(--font-display);
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(28px, 3vw, 42px);
   font-weight: 400;
-  color: var(--color-dark);
+  color: #1A1A1A;
   letter-spacing: 0.01em;
   margin: 0;
   line-height: 1.1;
 }
 
 .curated-looks-link {
-  font-family: var(--font-body);
-  font-size: var(--font-size-xs);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: #2B1650;
   text-decoration: none;
   white-space: nowrap;
-  border-bottom: 1px solid var(--color-primary);
+  border-bottom: 1px solid #2B1650;
   padding-bottom: 2px;
-  transition: color var(--transition-fast), border-color var(--transition-fast);
+  transition: color 0.18s ease, border-color 0.18s ease;
 }
 
 .curated-looks-link:hover {
-  color: var(--color-accent);
-  border-color: var(--color-accent);
+  color: #C9A96E;
+  border-color: #C9A96E;
+  text-decoration: none;
 }
 
 /* ── Grid ───────────────────────────────────────────────────────────────────── */
 .curated-looks-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-md);
-  max-width: var(--content-max-width);
+  gap: 16px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -60,16 +64,15 @@
 .curated-look-card {
   position: relative;
   overflow: hidden;
-  background: var(--color-light-gray);
-  /* Portrait ratio */
+  background: #EBEBEB;
   aspect-ratio: 3 / 4;
   cursor: pointer;
-  /* Stagger reveal starts hidden */
+  /* Stagger reveal initial state — overridden by lazy-styles.css */
   opacity: 0;
   transform: translateY(32px);
   transition:
-    opacity 0.6s ease,
-    transform 0.6s ease;
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .curated-look-card.is-visible {
@@ -77,45 +80,56 @@
   transform: translateY(0);
 }
 
-/* Stagger delays */
-.curated-look-card:nth-child(1) { transition-delay: 0s; }
-.curated-look-card:nth-child(2) { transition-delay: 0.1s; }
-.curated-look-card:nth-child(3) { transition-delay: 0.2s; }
-.curated-look-card:nth-child(4) { transition-delay: 0.3s; }
-.curated-look-card:nth-child(5) { transition-delay: 0.4s; }
-.curated-look-card:nth-child(6) { transition-delay: 0.5s; }
-.curated-look-card:nth-child(7) { transition-delay: 0.6s; }
-.curated-look-card:nth-child(8) { transition-delay: 0.7s; }
-
-/* ── Card Image ─────────────────────────────────────────────────────────────── */
+/* ── Card image ─────────────────────────────────────────────────────────────── */
 .curated-look-card-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
   transform: scale(1);
-  transition: transform 0.6s ease;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* EDS picture wrapper inside card */
+.curated-look-card picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.curated-look-card picture img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
 
 .curated-look-card:hover .curated-look-card-image,
-.curated-look-card:focus-within .curated-look-card-image {
-  transform: scale(1.05);
+.curated-look-card:focus-within .curated-look-card-image,
+.curated-look-card:hover picture img,
+.curated-look-card:focus-within picture img {
+  transform: scale(1.06);
 }
 
-/* ── Card Overlay ───────────────────────────────────────────────────────────── */
+/* ── Card overlay (revealed on hover) ──────────────────────────────────────── */
 .curated-look-card-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-md);
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-  transform: translateY(8px);
+  padding: 48px 16px 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.12) 60%, transparent 100%);
+  transform: translateY(6px);
   opacity: 0;
   transition:
-    opacity var(--transition-med),
-    transform var(--transition-med);
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .curated-look-card:hover .curated-look-card-overlay,
@@ -125,21 +139,27 @@
 }
 
 .curated-look-card-name {
-  font-family: var(--font-display);
-  font-size: var(--font-size-md);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 20px;
   font-weight: 400;
-  color: var(--color-white);
-  margin: 0 0 var(--spacing-xs);
+  color: #ffffff;
+  margin: 0 0 6px;
   line-height: 1.2;
 }
 
 .curated-look-card-cta {
-  font-family: var(--font-body);
-  font-size: var(--font-size-xs);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: #C9A96E;
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.curated-look-card-cta:hover {
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -151,11 +171,13 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #e8e0f0 0%, #d4c8e8 100%);
-  color: var(--color-primary);
-  font-family: var(--font-display);
-  font-size: var(--font-size-lg);
+  color: #2B1650;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 18px;
   font-style: italic;
-  opacity: 0.5;
+  opacity: 0.55;
+  text-align: center;
+  padding: 16px;
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────────── */
@@ -167,18 +189,13 @@
 
 @media (min-width: 768px) {
   .curated-looks {
-    padding: var(--spacing-xl) var(--spacing-lg);
-  }
-
-  .curated-looks-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-md);
+    padding: 64px 32px;
   }
 }
 
 @media (min-width: 1024px) {
   .curated-looks {
-    padding: var(--spacing-2xl) var(--spacing-xl);
+    padding: 96px 64px;
   }
 
   .curated-looks-grid {
