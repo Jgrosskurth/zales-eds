@@ -83,7 +83,7 @@ function buildTile(category) {
     const img = pic.querySelector('img');
     if (img) {
       img.className = 'category-nav-tile-image';
-      img.loading   = 'lazy';
+      img.loading   = 'eager';
       img.decoding  = 'async';
     }
     tile.appendChild(pic);
@@ -92,7 +92,7 @@ function buildTile(category) {
     img.className = 'category-nav-tile-image';
     img.src       = category.imgSrc;
     img.alt       = category.imgAlt ?? category.name;
-    img.loading   = 'lazy';
+    img.loading   = 'eager';
     img.decoding  = 'async';
     tile.appendChild(img);
   } else {
