@@ -103,7 +103,16 @@ function buildHero(block, { eyebrow, headline, body, media, ctas, isVideo }) {
     img.decoding = 'async';
     mediaEl.appendChild(img);
   } else {
-    // Fallback gradient background
+    // Default hero image – rich jewelry lifestyle shot
+    const defaultImg = document.createElement('img');
+    defaultImg.src = 'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=1600&q=80&auto=format&fit=crop';
+    defaultImg.alt = 'Holiday Collection 2024';
+    defaultImg.loading = 'eager';
+    defaultImg.fetchPriority = 'high';
+    defaultImg.decoding = 'async';
+    defaultImg.style.cssText = 'width:100%;height:100%;object-fit:cover;display:block;';
+    mediaEl.appendChild(defaultImg);
+    // Fallback gradient background in case image fails
     mediaEl.style.background = 'linear-gradient(135deg, #1a0f3c 0%, #2B1650 55%, #3d2070 100%)';
   }
 
