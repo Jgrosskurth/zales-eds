@@ -17,9 +17,9 @@ const DEFAULT_TABS = [
     body:     'From diamond tennis bracelets to stackable rings and beyond — discover pieces that speak to her style.',
     ctaLabel: 'Shop Gifts For Her',
     ctaHref:  '/gifts/for-her',
-    imgSrc:   'https://images.unsplash.com/photo-1573408301185-9519f94815ae?w=800&q=80&auto=format&fit=crop',
+    imgSrc:   'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=800&q=80&auto=format&fit=crop',
     imgAlt:   'Elegant jewelry gifts for her',
-    thumbSrc: 'https://images.unsplash.com/photo-1573408301185-9519f94815ae?w=120&q=70&auto=format&fit=crop',
+    thumbSrc: 'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=120&q=70&auto=format&fit=crop',
     thumbAlt: 'For Her tab',
   },
   {
