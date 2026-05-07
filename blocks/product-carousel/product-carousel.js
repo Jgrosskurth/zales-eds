@@ -46,7 +46,7 @@ const DEFAULT_PRODUCTS = [
     price:     '$349',
     salePrice: null,
     href:      '/jewelry/earrings/hoops',
-    imgSrc:    'https://images.unsplash.com/photo-1573408301185-9519f94815ae?w=400&q=80&auto=format&fit=crop',
+    imgSrc:    'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=400&q=80&auto=format&fit=crop',
     imgAlt:    'Gold Hoop Earrings',
   },
   {
