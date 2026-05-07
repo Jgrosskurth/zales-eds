@@ -155,7 +155,7 @@ function initReveal(block) {
         io.unobserve(block);
       }
     },
-    { threshold: 0.01 },
+    { threshold: 0.05, rootMargin: '300px 0px 300px 0px' },
   );
   io.observe(block);
 }
