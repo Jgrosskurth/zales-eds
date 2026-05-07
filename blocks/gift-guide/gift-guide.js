@@ -113,7 +113,7 @@ function buildTabButton(tab, index) {
     const pic = tab.thumbPicEl.cloneNode(true);
     const img = pic.querySelector('img');
     if (img) {
-      img.loading = 'lazy';
+      img.loading = 'eager';
       img.decoding = 'async';
       img.alt = tab.thumbAlt;
       img.removeAttribute('width');
@@ -122,7 +122,7 @@ function buildTabButton(tab, index) {
     thumbHTML = `<div class="gift-guide-tab-thumb">${pic.outerHTML}</div>`;
   } else if (tab.thumbSrc) {
     thumbHTML = `<div class="gift-guide-tab-thumb">
-      <img src="${tab.thumbSrc}" alt="${tab.thumbAlt}" loading="lazy" decoding="async"/>
+      <img src="${tab.thumbSrc}" alt="${tab.thumbAlt}" loading="eager" decoding="async"/>
     </div>`;
   }
 
@@ -153,7 +153,7 @@ function buildPanel(tab, index) {
     const pic = tab.panelPicEl.cloneNode(true);
     const img = pic.querySelector('img');
     if (img) {
-      img.loading = index === 0 ? 'eager' : 'lazy';
+      img.loading = 'eager';
       img.decoding = 'async';
     }
     imgHTML = pic.outerHTML;
@@ -161,7 +161,7 @@ function buildPanel(tab, index) {
     imgHTML = `<img
       src="${tab.imgSrc}"
       alt="${tab.imgAlt}"
-      loading="${index === 0 ? 'eager' : 'lazy'}"
+      loading="eager"
       decoding="async"
     />`;
   } else {
@@ -268,10 +268,10 @@ export default function decorate(block) {
   if (heroPicEl) {
     const pic = heroPicEl.cloneNode(true);
     const img = pic.querySelector('img');
-    if (img) { img.loading = 'lazy'; img.decoding = 'async'; }
+    if (img) { img.loading = 'eager'; img.decoding = 'async'; }
     heroImgHTML = pic.outerHTML;
   } else {
-    heroImgHTML = `<img class="gift-guide-hero-image" src="${heroImgSrc}" alt="Holiday Gift Guide" loading="lazy" decoding="async"/>`;
+    heroImgHTML = `<img class="gift-guide-hero-image" src="${heroImgSrc}" alt="Holiday Gift Guide" loading="eager" decoding="async"/>`;
   }
 
   /* Tab buttons + panels */
