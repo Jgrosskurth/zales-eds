@@ -133,7 +133,7 @@ function initReveal(grid) {
     },
     {
       threshold:  0.06,
-      rootMargin: '300px 0px 300px 0px',
+      rootMargin: '9999px 0px 9999px 0px',
     },
   );
 
