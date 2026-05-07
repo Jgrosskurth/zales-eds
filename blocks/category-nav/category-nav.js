@@ -27,7 +27,7 @@ const DEFAULT_CATEGORIES = [
   {
     name:    'Earrings',
     href:    '/jewelry/earrings',
-    imgSrc:  'https://images.unsplash.com/photo-1573408301185-9519f94815ae?w=500&q=80&auto=format&fit=crop',
+    imgSrc:  'https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?w=500&q=80&auto=format&fit=crop',
     imgAlt:  'Shop Earrings',
   },
   {
