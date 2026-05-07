@@ -81,17 +81,18 @@ function parseTabs(rows) {
     // CTA
     const ctaEl = cells[3]?.querySelector('a') ?? cells[4]?.querySelector('a') ?? null;
 
+    const def = DEFAULT_TABS[i] ?? {};
     return {
-      label:    cells[0]?.textContent.trim() ?? `Tab ${i + 1}`,
-      headline: cells[1]?.textContent.trim() ?? '',
-      body:     cells[2]?.textContent.trim() ?? '',
-      ctaLabel: ctaEl?.textContent.trim() ?? 'Shop Now',
-      ctaHref:  ctaEl?.href ?? '#',
-      imgSrc:   !panelPicEl ? (panelImgEl?.src ?? null) : null,
-      imgAlt:   panelImgEl?.alt ?? panelPicEl?.querySelector('img')?.alt ?? '',
+      label:    cells[0]?.textContent.trim() || def.label || `Tab ${i + 1}`,
+      headline: cells[1]?.textContent.trim() || def.headline || '',
+      body:     cells[2]?.textContent.trim() || def.body || '',
+      ctaLabel: ctaEl?.textContent.trim() || def.ctaLabel || 'Shop Now',
+      ctaHref:  ctaEl?.href || def.ctaHref || '#',
+      imgSrc:   !panelPicEl ? (panelImgEl?.src ?? def.imgSrc ?? null) : null,
+      imgAlt:   panelImgEl?.alt ?? panelPicEl?.querySelector('img')?.alt ?? def.imgAlt ?? '',
       panelPicEl: panelPicEl ?? null,
-      thumbSrc:  !thumbPicEl ? (thumbImgEl?.src ?? null) : null,
-      thumbAlt:  thumbImgEl?.alt ?? '',
+      thumbSrc:  !thumbPicEl ? (thumbImgEl?.src ?? def.thumbSrc ?? null) : null,
+      thumbAlt:  thumbImgEl?.alt ?? def.thumbAlt ?? '',
       thumbPicEl: thumbPicEl ?? null,
     };
   });
