@@ -74,7 +74,7 @@ export default function decorate(block) {
         io.unobserve(block);
       }
     },
-    { threshold: 0.05, rootMargin: '300px 0px 300px 0px' },
+    { threshold: 0.05, rootMargin: '9999px 0px 9999px 0px' },
   );
   io.observe(block);
 }
