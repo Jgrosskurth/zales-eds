@@ -46,7 +46,7 @@ export default function decorate(block) {
     }
     imageHTML = pic.outerHTML;
   } else {
-    imageHTML = `<img src="${imgSrc}" alt="${imgAlt}" loading="lazy" decoding="async"/>`;
+    imageHTML = `<img src="${imgSrc}" alt="${imgAlt}" loading="eager" decoding="async"/>`;
   }
 
   /* ── Build DOM ── */
