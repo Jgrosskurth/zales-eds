@@ -147,7 +147,7 @@ function initStaggerReveal(grid) {
     },
     {
       threshold:  0.08,
-      rootMargin: '0px 0px -48px 0px',
+      rootMargin: '300px 0px 300px 0px',
     },
   );
 
