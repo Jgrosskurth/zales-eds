@@ -80,7 +80,7 @@ function buildCard(look) {
     const pic = look.pictureEl.cloneNode(true);
     const img = pic.querySelector('img');
     if (img) {
-      img.loading = 'lazy';
+      img.loading = 'eager';
       img.decoding = 'async';
       img.className = 'curated-look-card-image';
     }
@@ -90,7 +90,7 @@ function buildCard(look) {
     img.className = 'curated-look-card-image';
     img.src       = look.imgSrc;
     img.alt       = look.imgAlt ?? look.name;
-    img.loading   = 'lazy';
+    img.loading   = 'eager';
     img.decoding  = 'async';
     card.appendChild(img);
   } else {
