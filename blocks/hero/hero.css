@@ -333,3 +333,12 @@
     padding: 0 80px 96px;
   }
 }
+
+
+/*    Full-bleed override: break out of EDS .section > div constraint          */
+.hero-wrapper {
+max-width: 100% !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+
