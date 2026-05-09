@@ -22,7 +22,7 @@ export default function decorate(block) {
   const mediaRow  = rows[0] ?? null;
   const pictureEl = mediaRow?.querySelector('picture') ?? null;
   const imgEl     = mediaRow?.querySelector('img') ?? null;
-  const imgSrc    = !pictureEl ? (imgEl?.src ?? 'https://images.unsplash.com/photo-1519741497674-611481863552?w=900&q=80&auto=format&fit=crop') : null;
+  const imgSrc    = !pictureEl ? (imgEl?.src ?? 'https://images.unsplash.com/photo-1603974372039-adc49044b6bd?w=900&q=80&auto=format&fit=crop') : null;
   const imgAlt    = imgEl?.alt ?? pictureEl?.querySelector('img')?.alt ?? '';
 
   /* ── Parse content ── */
@@ -41,7 +41,7 @@ export default function decorate(block) {
     const pic = pictureEl.cloneNode(true);
     const img = pic.querySelector('img');
     if (img) {
-      img.loading = 'lazy';
+      img.loading = 'eager';
       img.decoding = 'async';
     }
     imageHTML = pic.outerHTML;
